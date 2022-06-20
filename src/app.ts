@@ -2,6 +2,7 @@ import express from "express";
 import db from "./config/dbConnect";
 import "dotenv/config";
 import books from "./models/Book";
+import routes from "./routes";
 
 db.on("error", console.log.bind(console, "Connection error."));
 db.once("open", () => console.log("Connection successful."));
@@ -10,15 +11,7 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.status(200).send("Curso de node");
-});
-
-app.get("/books", (req, res) => {
-  books.find((err, books) => {
-    res.status(200).json(books);
-  });
-});
+routes(app);
 
 app.get("/books/:id", (req, res) => {
   let index = getBookById(+req.params.id);
