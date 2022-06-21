@@ -5,21 +5,27 @@ import { CallbackError, HydratedDocument } from "mongoose";
 class BookController {
   static listBookById = (req: Request, res: Response) => {
     const id = req.params.id;
-    books.findById(id, (err: CallbackError, book: IBook) => {
-      if (err) {
-        res
-          .status(400)
-          .send({ message: `${err.message} = Book ID not found.` });
-      } else {
-        res.status(200).send(book);
-      }
-    });
+    books
+      .findById(id)
+      .populate("author", "name")
+      .exec((err, book) => {
+        if (err) {
+          res
+            .status(400)
+            .send({ message: `${err.message} = Book ID not found.` });
+        } else {
+          res.status(200).send(book);
+        }
+      });
   };
 
   static listBooks = (req: Request, res: Response) => {
-    books.find((err, books) => {
-      res.status(200).json(books);
-    });
+    books
+      .find()
+      .populate("author")
+      .exec((err, books) => {
+        res.status(200).json(books);
+      });
   };
 
   static registerBook = (req: Request, res: Response) => {

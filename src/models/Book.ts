@@ -1,9 +1,10 @@
-import mongoose, { HydratedDocument } from "mongoose";
+import mongoose from "mongoose";
+import { IAuthor } from "./Author";
 
 export interface IBook {
   id: string;
   title: string;
-  author: string;
+  author: IAuthor;
   publisher: string;
   pageNumber?: number;
 }
@@ -11,7 +12,11 @@ export interface IBook {
 const bookSchema = new mongoose.Schema<IBook>({
   id: { type: String },
   title: { type: String, required: true },
-  author: { type: String, required: true },
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "authors",
+    required: true,
+  },
   publisher: { type: String, required: true },
   pageNumber: { type: Number },
 });
