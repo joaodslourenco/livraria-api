@@ -11,4 +11,6 @@ router.post("/books", BookController.registerBook);
 
 router.put("/books/:id", BookController.updateBook);
 
+router.delete("/books/:id", BookController.deleteBook);
+
 export default router;

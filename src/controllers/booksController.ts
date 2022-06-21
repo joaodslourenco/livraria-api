@@ -46,6 +46,18 @@ class BookController {
       }
     });
   };
+
+  static deleteBook = (req: Request, res: Response) => {
+    const id = req.params.id;
+
+    books.findByIdAndDelete(id, (err: CallbackError) => {
+      if (!err) {
+        res.status(200).send({ message: "Book was removed successfully." });
+      } else {
+        res.status(500).send({ message: err.message });
+      }
+    });
+  };
 }
 
 export default BookController;
