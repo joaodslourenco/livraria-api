@@ -1,7 +1,5 @@
 import express from "express";
 import db from "./config/dbConnect";
-import "dotenv/config";
-import books from "./models/Book";
 import routes from "./routes";
 
 db.on("error", console.log.bind(console, "Connection error."));
@@ -12,32 +10,5 @@ const app = express();
 app.use(express.json());
 
 routes(app);
-
-app.get("/books/:id", (req, res) => {
-  let index = getBookById(+req.params.id);
-  res.status(200).json(books[index]);
-});
-
-app.post("/books", (req, res) => {
-  books.push(req.body);
-  res.status(201).send("Book was registered successfully!");
-});
-
-app.put("/books/:id", (req, res) => {
-  let index = getBookById(+req.params.id);
-  books[index].titulo = req.body.titulo;
-  res.status(200).json(books);
-});
-
-app.delete("/books/:id", (req, res) => {
-  let { id } = req.params;
-  let index = getBookById(+id);
-  books.splice(index, 1);
-  res.status(200).send(`Book ${id} was deleted successfully.`);
-});
-
-function getBookById(id: number) {
-  return books.findIndex((book) => book.id === id);
-}
 
 export default app;
