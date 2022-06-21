@@ -64,6 +64,18 @@ class BookController {
       }
     });
   };
+
+  static listBookByPublisher = (req: Request, res: Response) => {
+    const publisher = req.query.publisher;
+
+    books.find(
+      { publisher: publisher },
+      {},
+      (err: CallbackError, books: IBook) => {
+        res.status(200).send(books);
+      },
+    );
+  };
 }
 
 export default BookController;
