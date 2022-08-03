@@ -1,10 +1,7 @@
 <h1 align="center">📚 Livraria API - Node + TypeScript + MongoDB</h1>
 
 <p align="center">
-  <a href="#-funcionalidades">Funcionalidades</a> •
-  <a href="#-tecnologias-utilizadas">Tecnologias</a> •
-  <a href="#-como-executar-o-projeto"> 
-Como executar o projeto </a>
+API com funcionalidade CRUD para registro de livros e autores.
 </p>
 
 # ⚙️ Funcionalidades
@@ -55,4 +52,23 @@ OU
 npm run dev
 ```
 
-### Uma vez que o servidor esteja rodando, já é possível testar os endpoints através do aplicativo Postman. Para isso, dentro do Postman, selecione a opção "Import" e selecione o arquivo "endpoints-postman.json", incluído na pasta raiz do projeto. Desta feita, todos os endpoints estarão disponíveis e com os bodies das requisições prontos.
+## Rotas da API
+
+Para começar a utilizar a API, com o servidor sendo executado, utilize o Postman ou Insomnia para fazer requisições às rotas, conforme exposto na tabela abaixo:
+
+
+| Função | Tipo de requisição | Campos necessários (body) | Rota |
+|--------|--------------------|:-------------------------:|------|
+| Consultar livros | GET | N/A | "/books"
+| Consultar livros pela publicadora | GET |  N/A  | "/books/search" |
+| Consultar livro específico | GET | N/A | "/books/:id" |
+| Cadastrar novo livro | POST | {<br>"title": "abc", <br> "author": "abc", <br> "publisher": "abc", <br> "pageNumber": 123 <br>} | "/books" | 
+| Atualizar livro | PUT | {<br> "campo a ser atualizado": "novo valor" <br>} | "/books/:id" |
+| Deletar livro | DELETE | N/A  | "/books/:id" |
+| Consultar autores | GET | N/A | "/authors"
+| Consultar autor específico | GET | N/A | "/authors/:id" |
+| Cadastrar novo autor | POST | {<br>"name": "abc", <br> "nationality": "abc" <br>} | "/authors" | 
+| Atualizar autor | PUT | {<br> "campo a ser atualizado": "novo valor" <br>} | "/authors/:id" |
+| Deletar autor | DELETE | N/A  | "/authors/:id" |
+
+ 
